@@ -163,3 +163,12 @@ VERSÃO 11.1 — CORREÇÃO DO CELULAR
 Tela dedicada vertical: pista ampliada, controles compactos sem atalhos
 de teclado, largura ajustada e indicadores menores. A câmera vertical
 mostra um recorte ampliado da pista; na horizontal, mostra a pista completa.
+
+VERSÃO 12.0 — TELA VERTICAL COMPLETA
+Toque em Jogar com tela dedicada: o cenário ocupa a área visível em pé.
+Câmera própria mantém 700 unidades da pista à frente, sem esticar o jogador.
+Pular e Deslizar ficam na base; turbo, item e rota sobre o cenário.
+iPhone: abra no Safari, Compartilhar > Adicionar à Tela de Início.
+A barra do navegador pode aparecer no Safari comum; o atalho usa standalone.
+Não inclui cache offline: a abertura pelo atalho requer conexão.
+GitHub: atualize index.html, assets e manifest.webmanifest na raiz.
