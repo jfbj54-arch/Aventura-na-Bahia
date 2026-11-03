@@ -172,3 +172,11 @@ iPhone: abra no Safari, Compartilhar > Adicionar à Tela de Início.
 A barra do navegador pode aparecer no Safari comum; o atalho usa standalone.
 Não inclui cache offline: a abertura pelo atalho requer conexão.
 GitHub: atualize index.html, assets e manifest.webmanifest na raiz.
+
+VERSÃO 13.0 — TELAS SEPARADAS
+index.html: apresentação e botão Entrar no jogo.
+escolher.html: modo, destino, fase e personagem; botão Começar a jogar.
+jogar.html: apenas a partida e seus controles. Menu volta às escolhas.
+A escolha é transferida pelo armazenamento da sessão.
+GitHub: envie index.html, escolher.html, jogar.html, manifest.webmanifest
+e a pasta assets diretamente à raiz, substituindo os arquivos antigos.

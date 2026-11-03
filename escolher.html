@@ -1,0 +1,87 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="apple-mobile-web-app-capable" content="yes">
+<meta name="apple-mobile-web-app-title" content="Aventura Bahia">
+<meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+<meta name="theme-color" content="#073e40">
+<title>Aventura na Bahia</title>
+<meta name="description" content="Corra pelas praias de Prado, pule obstáculos e colete conchas em Aventura na Bahia.">
+<link rel="apple-touch-icon" href="assets/img/icon-180.png">
+<link rel="manifest" href="manifest.webmanifest">
+<link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
+<link rel="stylesheet" href="assets/css/style.css?v=13">
+</head>
+<body data-screen="setup">
+<header>
+<div class="brand">☀ Aventura<span>Bahia</span>
+</div>
+<small>UM RESPIRO. UMA PRAIA. UMA AVENTURA.</small>
+</header>
+<main>
+<div class="setup-nav"><a href="index.html">← Início</a><span>ESCOLHA SUA AVENTURA</span></div>
+<div class="intro">
+<div>
+<div class="eyebrow">FASE 01 · PRADO, BAHIA</div>
+<h1>Caminho das <em>Conchas.</em>
+</h1>
+</div>
+<p>Explore uma praia inspirada em Prado, entre ondas, coqueiros e falésias. Percorra 600 metros e encontre o quiosque.</p>
+</div>
+<section class="mode-picker" aria-label="Modo de jogo"><button id="mode-adventure" aria-pressed="true">🗺️ Aventura<small>Explore as seis fases</small></button><button id="mode-race" aria-pressed="false">🏁 Corrida<small>600 m contra três adversários</small></button></section>
+<section id="race-options" class="race-options" hidden><label>Destino <select id="race-destination"><option value="0">Prado</option><option value="1">Cumuruxatiba</option><option value="2">Corumbau</option><option value="3">Caraíva</option><option value="4">Praia do Espelho</option><option value="5">Trancoso</option></select></label><label><input type="checkbox" id="championship"> Campeonato · seis etapas</label><small>1º: 10 · 2º: 6 · 3º: 4 · 4º: 2 pontos. Sem concluir: 0.</small><p>As faixas verdes no chão dão aceleração. Passe por cima sem pular!</p></section>
+<section id="adventure-map" class="map-section" aria-label="Mapa da aventura"><div class="map-heading"><h2>Sua rota pela Bahia</h2><small id="save-status">Conclua uma fase para liberar a próxima · progresso neste navegador</small></div><div id="phase-map" class="phase-map"></div><p class="map-note">Escolher uma fase reinicia o percurso. Suas medalhas ficam guardadas.</p></section>
+<section class="character-picker" aria-label="Escolha seu personagem"><div><strong>Quem vai nessa aventura?</strong><small id="character-name" aria-live="polite">Homem selecionado</small></div><button id="choose-man" aria-pressed="true"><span>🧑</span> Homem<small>Corredor · camiseta laranja</small></button><button id="choose-woman" aria-pressed="false"><span>👩</span> Mulher<small>Corredora · camiseta turquesa</small></button></section>
+<section class="missions" aria-label="Missões da fase"><span><span id="phase-label">Fase 1 de 6</span> · MISSÕES DA PRAIA</span><b id="mission-shells">0/20 conchas</b><b id="mission-jumps">0/10 obstáculos pulados</b></section>
+<section class="setup-launch"><button id="launch-game">Começar a jogar →</button><p>Escolha o modo, o destino e seu personagem. Depois, entre na partida.</p><small id="launch-error" role="status"></small></section>
+<div class="mobile-help">📱 Toque para pular · deslize para baixo para agachar. Jogue em pé com os controles sobre o cenário. <button id="mobile-play">Jogar com tela dedicada</button></div><button id="mobile-exit" hidden>☰ Voltar ao menu</button>
+<div class="game">
+<div id="countdown" class="countdown" role="status" hidden>3</div>
+<canvas id="game" width="1100" height="490" aria-label="Jogo de corrida na praia">
+</canvas>
+<div class="hud">
+<div class="pill"><b id="race-position" hidden>1º / 4</b> ☀ <span id="score">0</span> m &nbsp; · &nbsp; <span id="lives" aria-label="3 vidas">♥♥♥</span> &nbsp; · &nbsp; 🐚 <span id="shells">0</span>
+</div>
+<div style="display:flex;gap:8px">
+<div class="pill">RECORDE &nbsp; <span id="best">0</span> m</div>
+<button id="pause" aria-label="Pausar">Ⅱ</button>
+</div>
+</div>
+<div id="gap" class="gap" hidden></div>
+<div id="race-board" class="race-board" hidden></div>
+<div class="overlay" id="overlay">
+<div class="card">
+<small>SINTA A BRISA. ENCARE O DESAFIO.</small>
+<h2 id="title">Uma praia. Duas missões.</h2>
+<p id="message">Você tem 3 vidas para chegar ao quiosque, a 600 m.<br>Colete 20 conchas e pule 10 obstáculos para ganhar ouro.</p>
+<div id="celebration" class="celebration" hidden></div>
+<div id="podium" class="podium" hidden></div>
+<button class="primary" id="start">Começar a jogar →</button>
+</div>
+</div>
+</div>
+<div class="route"><span id="remaining">600 m até o quiosque</span><progress id="progress" max="600" value="0" aria-label="Progresso até a chegada"></progress><span>⚑ CHEGADA</span></div>
+<div class="animal-guide"><span>🐬 Azul: acelera 30%</span><span>🐢 Tartaruga e gaivota: reduzem 25%</span><b id="effect" role="status">Ritmo normal</b></div>
+<div id="turbo-panel" class="turbo-panel"><div><strong id="turbo-status">Turbo pronto!</strong><small>+45% por 3 s · cada concha recarrega 20%</small></div><progress id="turbo-energy" max="100" value="100" aria-label="Energia do turbo"></progress><span id="pace">100% do ritmo inicial</span><button id="turbo" disabled>⚡ Turbo · Shift</button></div>
+<section class="tactics"><p id="route-note">Rota segura: menos obstáculos e menos conchas</p><div><button id="slide">↓ Deslizar · S</button><button id="item" disabled>🎁 Item vazio</button><button id="route">🌿 Rota segura · mudar R</button></div><small id="powers" role="status"></small><b id="hazard-warning" role="status"></b></section>
+<div class="bottom"><button id="fullscreen">⛶ Tela cheia</button><small id="fullscreen-status" role="status"></small>
+<div class="controls">
+<span class="desktop">
+<span class="key">ESPAÇO / ↑</span> <b>Pular</b>
+</span>
+<span>☝ <b>Toque na praia</b> para pular</span>
+</div>
+<button id="sound" aria-pressed="true">Som: ligado</button>
+<button id="jump">Pular ↑</button>
+</div>
+<div class="foot">
+<span>CENÁRIOS ARTÍSTICOS INSPIRADOS NO SUL DA BAHIA.</span>
+<span>Prado, BA · Edição 13.0</span>
+</div>
+</main>
+<script src="assets/js/game.js?v=13" defer>
+</script>
+</body>
+</html>
