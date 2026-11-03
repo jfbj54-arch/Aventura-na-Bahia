@@ -158,3 +158,8 @@ gesto lateral troca a rota. Todos os comandos têm botões.
 Use Jogar com tela dedicada para esconder o menu. Voltar ao menu pausa.
 Deitado, jogo e controles ficam lado a lado. A pista inteira permanece visível.
 Não é APK: é um jogo web, acessível pelo navegador.
+
+VERSÃO 11.1 — CORREÇÃO DO CELULAR
+Tela dedicada vertical: pista ampliada, controles compactos sem atalhos
+de teclado, largura ajustada e indicadores menores. A câmera vertical
+mostra um recorte ampliado da pista; na horizontal, mostra a pista completa.
