@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="assets/img/icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-<link rel="stylesheet" href="assets/css/style.css?v=13">
+<link rel="stylesheet" href="assets/css/style.css?v=14">
 </head>
 <body data-screen="play" class="mobile-playing">
 <header>
@@ -64,8 +64,8 @@
 </div>
 <div class="route"><span id="remaining">600 m até o quiosque</span><progress id="progress" max="600" value="0" aria-label="Progresso até a chegada"></progress><span>⚑ CHEGADA</span></div>
 <div class="animal-guide"><span>🐬 Azul: acelera 30%</span><span>🐢 Tartaruga e gaivota: reduzem 25%</span><b id="effect" role="status">Ritmo normal</b></div>
-<div id="turbo-panel" class="turbo-panel"><div><strong id="turbo-status">Turbo pronto!</strong><small>+45% por 3 s · cada concha recarrega 20%</small></div><progress id="turbo-energy" max="100" value="100" aria-label="Energia do turbo"></progress><span id="pace">100% do ritmo inicial</span><button id="turbo" disabled>⚡ Turbo · Shift</button></div>
-<section class="tactics"><p id="route-note">Rota segura: menos obstáculos e menos conchas</p><div><button id="slide">↓ Deslizar · S</button><button id="item" disabled>🎁 Item vazio</button><button id="route">🌿 Rota segura · mudar R</button></div><small id="powers" role="status"></small><b id="hazard-warning" role="status"></b></section>
+<div id="turbo-panel" class="turbo-panel"><div><strong id="turbo-status">Turbo pronto!</strong><small>+45% por 3 s · cada concha recarrega 20%</small></div><progress id="turbo-energy" max="100" value="100" aria-label="Energia do turbo"></progress><span id="pace">100% do ritmo inicial</span><button id="turbo" aria-label="Ativar turbo" disabled>⚡ Turbo · Shift</button></div>
+<section class="tactics"><p id="route-note">Rota segura: menos obstáculos e menos conchas</p><div><button id="slide" aria-label="Deslizar">↓ Deslizar · S</button><button id="item" disabled>🎁 Item vazio</button><button id="route">🌿 Rota segura · mudar R</button></div><small id="powers" role="status"></small><b id="hazard-warning" role="status"></b></section>
 <div class="bottom"><button id="fullscreen">⛶ Tela cheia</button><small id="fullscreen-status" role="status"></small>
 <div class="controls">
 <span class="desktop">
@@ -73,15 +73,15 @@
 </span>
 <span>☝ <b>Toque na praia</b> para pular</span>
 </div>
-<button id="sound" aria-pressed="true">Som: ligado</button>
-<button id="jump">Pular ↑</button>
+<button id="sound" aria-label="Ligar ou desligar som" aria-pressed="true">Som: ligado</button>
+<button id="jump" aria-label="Pular">Pular ↑</button>
 </div>
 <div class="foot">
 <span>CENÁRIOS ARTÍSTICOS INSPIRADOS NO SUL DA BAHIA.</span>
-<span>Prado, BA · Edição 13.0</span>
+<span>Prado, BA · Edição 14.0</span>
 </div>
 </main>
-<script src="assets/js/game.js?v=13" defer>
+<script src="assets/js/game.js?v=14" defer>
 </script>
 </body>
 </html>
