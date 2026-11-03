@@ -1,0 +1,160 @@
+AVENTURA NA BAHIA — VERSÃO 3.0
+
+COMO JOGAR
+Extraia a pasta inteira e abra index.html no navegador.
+Não é necessário instalar programas, cadastrar conta ou usar internet.
+Clique em Começar a jogar. Use Espaço, seta para cima, toque no cenário
+ou botão Pular. Pule pedras e caranguejos e colete conchas.
+A velocidade aumenta com a distância. P ou Esc pausa a partida.
+O recorde fica salvo neste navegador, quando o armazenamento está disponível.
+
+ESTRUTURA
+index.html                 Página principal
+assets/css/style.css       Cores, fontes, layout e adaptação de tela
+assets/js/game.js           Cenário, personagem, física, pontuação e controles
+assets/img/favicon.svg     Ícone da página
+
+COMO PUBLICAR NO GITHUB PAGES
+1. Envie index.html e a pasta assets para a raiz do repositório.
+2. Em Settings > Pages, selecione a branch e a pasta onde colocou os arquivos.
+3. Abra o endereço fornecido pelo GitHub após a publicação.
+Em hospedagem comum, envie os mesmos arquivos para a pasta pública do site.
+Mantenha os nomes e a estrutura das pastas.
+
+PERSONALIZAÇÃO
+Edite os textos em index.html e as cores em assets/css/style.css.
+O cenário é desenhado em Canvas pelo arquivo assets/js/game.js.
+Não usa imagens externas, bibliotecas, serviços pagos ou banco de dados.
+Esta versão tem uma fase de 600 metros, com três vidas e recorde local.
+
+NOVIDADES DA VERSÃO 3.0
+Cenário ilustrado com mais detalhes, falésias, coqueiros com folhas,
+mar com ondas, aves, reflexos, pegadas e iluminação de sol.
+Personagem com braços e pernas articulados, tênis e sombra de salto.
+Efeitos sonoros de salto, coleta e colisão, com botão para silenciar.
+O estilo é ilustrado em 2D, não fotográfico.
+
+FASE 01 — CAMINHO DAS CONCHAS
+Chegue ao quiosque em 600 metros. Cada colisão tira uma vida.
+Após sofrer dano, você fica protegido por 1,7 segundo.
+Missões: coletar 20 conchas e pular 10 obstáculos.
+Chegada sem missões: bronze; uma missão: prata; duas missões: ouro.
+As missões são opcionais para concluir a fase.
+
+PERSONAGEM — EDIÇÃO 3.1
+Novo personagem de perfil, boné com viseira, camiseta com emblema,
+short com costuras e tênis com sola. Passadas alternadas e pose de salto.
+
+PROGRESSÃO — VERSÃO 3.2
+Agora são três fases. Ao concluir, clique em Próxima fase.
+1. Caminho das Conchas: 600m, 20 conchas, 10 obstáculos.
+2. Trilha das Falésias: 750m, 25 conchas, 12 obstáculos.
+3. Corrida do Pôr do Sol: 900m, 30 conchas, 15 obstáculos.
+A velocidade aumenta e a iluminação muda entre as fases.
+Você inicia cada fase com três vidas. Perder permite tentar a mesma fase.
+Após a terceira chegada, pode recomeçar a aventura.
+
+VERSÃO 4.0 — SEIS FASES E ANIMAIS
+Novas fases: Voo das Gaivotas (1000m), Trilha dos Animais (1100m),
+Grande Travessia (1250m).
+Golfinho azul dá +30% de velocidade. Tartaruga e gaivota reduzem 25%.
+Cada efeito dura 4 segundos; o último contato substitui o efeito anterior.
+Animais não tiram vidas. Pedras e caranguejos continuam causando dano.
+Salte para alcançar o golfinho ou escapar da tartaruga.
+Os animais aparecem em todas as fases.
+
+VERSÃO 4.1 — ESCOLHA DE PERSONAGEM
+Use os botões Homem ou Mulher acima do jogo. A escolha aparece no cenário
+e fica salva no navegador, quando o armazenamento está disponível.
+Homem: camiseta laranja e boné areia. Mulher: camiseta turquesa,
+boné verde claro e rabo de cavalo. Mesma velocidade e alcance de salto.
+Pernas redesenhadas com coxa, joelho, canela, tornozelo e pé articulados.
+
+VERSÃO 4.2 — SENTIDO DA CORRIDA
+Passadas corrigidas nos dois personagens: pé recua durante o apoio
+e avança pelo ar, com os braços em oposição às pernas.
+
+VERSÃO 5.0 — MAPA E PROGRESSO
+Selecione as fases liberadas no mapa acima do jogo. Vencer libera a próxima.
+O jogo salva a última fase, os desbloqueios e a melhor medalha de cada fase
+no armazenamento local. Ao voltar, você recomeça a fase selecionada.
+Não salva a posição no meio da corrida e não sincroniza entre aparelhos.
+Manter a mesma pasta/endereço e navegador ajuda a preservar os dados.
+Novos elementos de cenário: veleiro, rochedos, vila ao entardecer,
+bando de aves, vegetação de restinga e vila com bandeirolas.
+
+VERSÃO 6.0 — MODO CORRIDA
+Escolha Corrida para disputar 600m contra Lia, Caio e Bia (jogo local).
+O placar mostra posição e distância. Os três adversários pulam obstáculos
+e podem ganhar ou perder velocidade ao encontrar animais.
+Cada corredor tem três vidas. Sem vidas, não conclui a disputa.
+Ao chegar, o jogo simula os metros restantes dos adversários e exibe
+a classificação final com tempos. Corrida não desbloqueia fases.
+O modo Aventura mantém seu mapa, medalhas e progresso.
+
+VERSÃO 6.1 — TURBO MANUAL
+Use Shift, T ou o botão Turbo. A largada começa com energia cheia.
+Turbo acelera 45% por 3 segundos; cada concha recarrega 20%.
+Fora do turbo, a energia também recarrega 3% por segundo.
+O turbo funciona em Aventura e Corrida. Não acumula com o golfinho.
+Ativar turbo remove a lentidão atual. Pausar congela sua duração.
+
+VERSÃO 7.0 — PAISAGENS DO SUL DA BAHIA
+Seis cenários com aparência fotográfica gerados por IA, inspirados em:
+Prado, Cumuruxatiba, Corumbau, Caraíva, Praia do Espelho e Trancoso.
+São recriações artísticas, não fotografias documentais dos locais.
+Fundos locais em assets/img, sem conexão obrigatória.
+Corrida usa Prado; aventura percorre os seis destinos.
+Imagens ainda carregando ou indisponíveis usam o cenário desenhado.
+Referências geográficas: https://www.viajenaviagem.com/guia-de-praias-sul-bahia/
+
+VERSÃO 7.1 — PERSONAGENS REALISTAS
+Homem e mulher com aparência humana realista, gerados por IA.
+Animação com seis poses de corrida por personagem.
+Atlas local: assets/img/corredores-realistas.png.
+São pessoas fictícias. Regras, velocidade e saltos iguais para os dois.
+
+VERSÃO 7.2 — MOVIMENTO
+Paisagem rola continuamente para trás; areia passa mais rápido em primeiro
+plano. As passadas acompanham a velocidade, inclusive durante o turbo.
+Poses alinhadas pelos pés e poeira leve ao correr. Pausa congela o movimento.
+
+VERSÃO 8.0 — CORRIDAS COMPLETAS
+Corridas: escolha qualquer um dos seis destinos.
+Largada com contagem de 3 segundos. Faixas verdes no chão dão +30%
+por 3s e recarregam 25% do turbo; pule apenas para evitá-las.
+Adversários aparecem em faixas visuais separadas, com nomes e cores.
+Campeonato: seis etapas, pontos 10/6/4/2; não concluir vale zero.
+Após cada chegada, veja os pontos e clique em Próxima etapa.
+No final, aparece o vencedor; empate de pontos é anunciado.
+Campeonato dura esta sessão e reinicia ao recarregar.
+Tela cheia: use o botão; Esc sai. Depende do suporte do navegador.
+
+VERSÃO 9.0 — ATUALIZAÇÃO CONSOLIDADA
+Poses de decolagem, salto e aterrissagem; pose de comemoração.
+Animais com aparência realista: caranguejo, tartaruga, gaivota e golfinho.
+Ondas animadas sobre a paisagem e coqueiros em primeiro plano com balanço.
+Distância em metros até o adversário imediatamente à frente.
+Som ambiente de mar sintetizado, passos na areia e aplausos na chegada.
+O botão Som silencia tudo. Sons começam após interação e param na pausa.
+Pódio visual com personagens, medalhas e classificação.
+
+VERSÃO 10.0 — OBSTÁCULOS E ESTRATÉGIA
+Deslizar: seta para baixo, S ou botão. Dura 0,75s.
+Galhos baixos: deslize; troncos rolando e barreiras: pule.
+Avisos antecipados indicam obstáculos especiais na rota atual.
+Caixas-surpresa: colete apenas com o inventário vazio. Use E ou botão.
+Escudo protege de uma colisão. Ímã atrai conchas por 8s.
+Prancha protege uma colisão por até 6s. Energia recarrega o turbo.
+Troca de rota: R ou botão, com intervalo de 2s.
+Rota segura tem menos obstáculos e 2 conchas por conjunto; risco tem 5.
+A rota de risco aparece 20px ao fundo. Itens translúcidos pertencem
+a outra rota. Cada rota tem seus obstáculos e suas conchas.
+
+VERSÃO 11.0 — CELULAR
+Abra o endereço publicado no navegador do celular.
+Toque no cenário para pular; deslize para baixo para agachar;
+gesto lateral troca a rota. Todos os comandos têm botões.
+Use Jogar com tela dedicada para esconder o menu. Voltar ao menu pausa.
+Deitado, jogo e controles ficam lado a lado. A pista inteira permanece visível.
+Não é APK: é um jogo web, acessível pelo navegador.
