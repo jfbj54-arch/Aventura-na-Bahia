@@ -186,3 +186,5 @@ VERSÃO 14: controles móveis transparentes. Seta para cima pula, seta para baix
 ATUALIZAÇÃO COMPLETA: roupas desbloqueadas com conchas coletadas (mais 20 por chegada), recordes separados de aventura/corrida por praia, oponentes com turbo e deslize, câmera suave, poeira e trechos de areia, passarela, pedras e ponte. Dados ficam neste navegador. Envie todos os arquivos e assets ao GitHub.
 
 CORRIDA REFINADA: aceleração e turbo progressivos para todos, passada ancorada no quadril e passos sincronizados, aterrissagem com flexão, impacto reduz ritmo, sons por piso, areia/pedras mais lentas e madeira mais rápida, rivais guardam turbo para ultrapassar ou reta final, troca de rota suave. Controles e progresso preservados.
+
+NITIDEZ: fundos refeitos com mais pixels na altura de cada cenário, renderização na resolução da tela (até 3x, com limite para desempenho), jogador e rivais 25% maiores, pés no mesmo ponto da pista e indicação de dano menos transparente.
