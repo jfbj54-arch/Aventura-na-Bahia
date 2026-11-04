@@ -5,7 +5,7 @@ const c=document.querySelector('canvas'),x=c.getContext('2d'),$=s=>document.getE
 // Carteira, roupas e recordes por destino, independentes do progresso antigo.
 const LOOKS=[{name:'Original',cost:0,hue:0},{name:'Azul oceano',cost:60,hue:150},{name:'Verde coqueiro',cost:120,hue:80},{name:'Viseira dourada',cost:200,hue:0}];
 let collection={coins:0,owned:[0],look:0,records:{}},runClock=0,rewardSaved=false,newRecord=false,runReward=0,dust=[],zoom=1;
-try{const v=JSON.parse(localStorage.getItem('bahia-collection-v1'));if(v){collection.coins=Number.isFinite(v.coins)?Math.max(0,Math.floor(v.coins)):0;collection.owned=[0,...[1,2,3].filter(i=>Array.isArray(v.owned)&&v.owned.includes(i))];collection.look=collection.owned.includes(v.look)?v.look:0;for(const [k,n] of Object.entries(v.records||{}))if(/^(adventure|race)-[0-8]$/.test(k)&&Number.isFinite(n)&&n>0)collection.records[k]=n}}catch{}
+try{const v=JSON.parse(localStorage.getItem('bahia-collection-v1'));if(v){collection.coins=Number.isFinite(v.coins)?Math.max(0,Math.floor(v.coins)):0;collection.owned=[0,...[1,2,3].filter(i=>Array.isArray(v.owned)&&v.owned.includes(i))];collection.look=collection.owned.includes(v.look)?v.look:0;for(const [k,n] of Object.entries(v.records||{}))if(/^(adventure|race)-(?:[0-9]|10)$/.test(k)&&Number.isFinite(n)&&n>0)collection.records[k]=n}}catch{}
 function saveCollection(){try{localStorage.setItem('bahia-collection-v1',JSON.stringify(collection))}catch{}}
 function recordKey(){return gameMode+'-'+(gameMode==='race'?raceDestination:phaseIndex)}
 function finishRewards(won){if(rewardSaved)return;rewardSaved=true;runReward=shells+(won?20:0);collection.coins+=runReward;newRecord=false;if(won){const key=recordKey(),time=gameMode==='race'?playerFinish:runClock;if(time>0&&(!collection.records[key]||time<collection.records[key])){collection.records[key]=time;newRecord=true}}saveCollection();renderCollection()}
@@ -42,8 +42,8 @@ const runnerFrames=[[[45, 8, 282, 339], [473, 7, 137, 346], [828, 7, 154, 344], 
 let landingTime=0,stepClock=0,celebrating=false;
 let impactTime=0,bodyLean=0,previousStep=-1;
 const hipAnchors=[.44,.35,.30,.30,.28,.38];
-function surfaceAt(distance=dist){const destination=gameMode==='race'?raceDestination:phaseIndex;if(PHASES[destination]?.city)return 'asphalt';return ['sand','boardwalk','stone','bridge'][(Math.floor(Math.max(0,distance)/140)+destination)%4]}
-function surfacePace(distance=dist){return {sand:.94,boardwalk:1.04,stone:.88,bridge:1.01,asphalt:1.02}[surfaceAt(distance)]}
+function surfaceAt(distance=dist){const destination=gameMode==='race'?raceDestination:phaseIndex;if(PHASES[destination]?.boat)return 'water';if(PHASES[destination]?.city)return 'asphalt';return [0,1,2,4].includes(destination)?'sand':'boardwalk'}
+function surfacePace(distance=dist){return {sand:.94,boardwalk:1.04,stone:.88,bridge:1.01,asphalt:1.02,water:1.03}[surfaceAt(distance)]}
 function smoothVelocity(current,target,dt){return current+(target-current)*(1-Math.exp(-dt*(target>current?3.2:5)))}
 const actionAtlas=new Image();actionAtlas.src='assets/img/acoes-e-animais.png';
 function drawAction(row,col,cx,baseline,height){if(!actionAtlas.complete||!actionAtlas.naturalWidth)return false;const cw=actionAtlas.naturalWidth/4,ch=actionAtlas.naturalHeight/3;const width=height*cw/ch;x.drawImage(actionAtlas,col*cw,row*ch,cw,ch,cx-width/2,baseline-height,width,height);return true}
@@ -137,7 +137,9 @@ const PHASES=[
  {name:'Chegada em Trancoso',place:'Trancoso · Fim de tarde',length:1250,speed:370,shellGoal:40,jumpGoal:20,tint:'#ed9865'},
  {name:'Ruas de Ilhéus',place:'Ilhéus · Centro histórico',length:900,speed:315,shellGoal:30,jumpGoal:12,city:true},
  {name:'Orla de Porto Seguro',place:'Porto Seguro · Avenida à beira-mar',length:1050,speed:330,shellGoal:35,jumpGoal:14,city:true},
- {name:'Desafio de Itabuna',place:'Itabuna · Centro urbano',length:1200,speed:345,shellGoal:40,jumpGoal:16,city:true}
+ {name:'Desafio de Itabuna',place:'Itabuna · Centro urbano',length:1200,speed:345,shellGoal:40,jumpGoal:16,city:true},
+ {name:'Travessia de Caraíva',place:'Caraíva · Corrida de barco',length:900,speed:350,shellGoal:30,jumpGoal:0,boat:true,background:3},
+ {name:'Navegando em Corumbau',place:'Corumbau · Mar aberto',length:1100,speed:370,shellGoal:35,jumpGoal:0,boat:true,background:2}
 ];let phaseIndex=0,FINISH=600,wonPhase=false;let lives=3,cleared=0,invincible=0;
 let effect=null,effectTime=0,animalSpawn=3;
 // Progresso local: fases liberadas e melhor medalha por percurso.
@@ -145,7 +147,7 @@ let progressData={unlocked:0,selected:0,medals:{}};
 try{const saved=JSON.parse(localStorage.getItem('bahia-progress-v1'));if(saved&&Number.isInteger(saved.unlocked)&&saved.unlocked>=0&&saved.unlocked<PHASES.length){progressData.unlocked=saved.unlocked;progressData.selected=Number.isInteger(saved.selected)?Math.max(0,Math.min(saved.selected,saved.unlocked)):0;for(let i=0;i<PHASES.length;i++){let m=saved.medals?.[i];if(Number.isInteger(m)&&m>=1&&m<=3)progressData.medals[i]=m}}}catch{}
 phaseIndex=progressData.selected;
 function saveProgress(){try{localStorage.setItem('bahia-progress-v1',JSON.stringify(progressData));$('save-status').textContent='Progresso salvo neste navegador'}catch{$('save-status').textContent='Este navegador não permitiu salvar o progresso'}}
-function renderMap(){const icons=['🏖️','⛰️','🌅','🦜','🌿','🏘️','🏛️','🚦','🏙️'];$('phase-map').innerHTML=PHASES.map((p,i)=>'<button type="button" data-phase="'+i+'" '+(i>progressData.unlocked?'disabled ':'')+'aria-pressed="'+(i===phaseIndex)+'"><span>'+icons[i]+'</span><small>FASE '+(i+1)+'</small><strong>'+p.name+'</strong><em>'+(i>progressData.unlocked?'🔒 Conclua a fase anterior':progressData.medals[i]?['','🥉 Bronze','🥈 Prata','🥇 Ouro'][progressData.medals[i]]:'Disponível · '+p.length+' m')+'</em></button>').join('')}
+function renderMap(){const icons=['🏖️','⛰️','🌅','🦜','🌿','🏘️','🏛️','🚦','🏙️','🚤','⛵'];$('phase-map').innerHTML=PHASES.map((p,i)=>'<button type="button" data-phase="'+i+'" '+(i>progressData.unlocked?'disabled ':'')+'aria-pressed="'+(i===phaseIndex)+'"><span>'+icons[i]+'</span><small>FASE '+(i+1)+'</small><strong>'+p.name+'</strong><em>'+(i>progressData.unlocked?'🔒 Conclua a fase anterior':progressData.medals[i]?['','🥉 Bronze','🥈 Prata','🥇 Ouro'][progressData.medals[i]]:'Disponível · '+p.length+' m')+'</em></button>').join('')}
 function choosePhase(i){if(gameMode==='race')return;if(!Number.isInteger(i)||i<0||i>progressData.unlocked||i>=PHASES.length)return;phaseIndex=i;celebrating=false;$('celebration').hidden=true;turboEnergy=100;turboTime=0;progressData.selected=i;wonPhase=false;state='ready';dist=0;shells=0;cleared=0;lives=3;y=0;vy=0;effect=null;effectTime=0;objects=[];particles=[];applyPhase();syncHud();renderMap();saveProgress();$('title').textContent=phase().name;$('message').textContent='Percorra '+phase().length+' m. Missões: '+phase().shellGoal+' conchas e '+phase().jumpGoal+' obstáculos pulados.';$('start').textContent='Jogar esta fase →';$('overlay').classList.remove('hidden')}
 $('phase-map').onclick=e=>{const button=e.target.closest('button[data-phase]');if(button&&!button.disabled)choosePhase(Number(button.dataset.phase))};
 // Turbo manual: carga completa na largada, conchas e recarga gradual.

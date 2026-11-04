@@ -196,3 +196,5 @@ CONTROLES POR GESTOS: deslize para os lados para trocar faixa, para cima para pu
 PASSARELA: textura fotográfica de madeira envelhecida projetada na profundidade, vigas e corrimãos laterais, sombras e integração da base com a praia. Física, gestos e fases preservados. Atualize os três HTML e a pasta assets completa.
 
 CENÁRIO VIVO: aves ao longe, pequenas ondas nas laterais, poeira dos passos na areia, brilho ao coletar conchas, conchas em movimento, sombras dos postes e toldos ao vento nas cidades. Efeitos visuais não alteram colisões nem gestos.
+
+PRAIA E BARCOS: onze fases. Prado, Cumuruxatiba, Corumbau e Praia do Espelho têm areia contínua sem cercas; Caraíva e Trancoso mantêm passarelas. Novas travessias de barco em Caraíva e Corumbau, com água texturizada, rastro, boias, pedras e embarcações. Nos barcos: lados = pilotar, cima = turbo, baixo = freio. Novos arquivos assets/img/barcos.png e assets/img/areia-agua.png. Atualize os três HTML e toda a pasta assets. Campeonato ampliado para onze etapas.

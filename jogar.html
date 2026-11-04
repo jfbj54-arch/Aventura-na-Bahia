@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="assets/img/icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-<link rel="stylesheet" href="assets/css/style.css?v=22">
+<link rel="stylesheet" href="assets/css/style.css?v=23">
 </head>
 <body data-screen="play" class="mobile-playing">
 <header>
@@ -30,12 +30,12 @@
 </div>
 <p>Explore uma praia inspirada em Prado, entre ondas, coqueiros e falésias. Percorra 600 metros e encontre o quiosque.</p>
 </div>
-<section class="mode-picker" aria-label="Modo de jogo"><button id="mode-adventure" aria-pressed="true">🗺️ Aventura<small>Explore as nove fases</small></button><button id="mode-race" aria-pressed="false">🏁 Corrida<small>600 m contra três adversários</small></button></section>
-<section id="race-options" class="race-options" hidden><label>Destino <select id="race-destination"><option value="0">Prado</option><option value="1">Cumuruxatiba</option><option value="2">Corumbau</option><option value="3">Caraíva</option><option value="4">Praia do Espelho</option><option value="5">Trancoso</option><option value="6">Ilhéus · Cidade</option><option value="7">Porto Seguro · Cidade</option><option value="8">Itabuna · Cidade</option></select></label><label><input type="checkbox" id="championship"> Campeonato · nove etapas</label><small>1º: 10 · 2º: 6 · 3º: 4 · 4º: 2 pontos. Sem concluir: 0.</small><p>As faixas verdes no chão dão aceleração. Passe por cima sem pular!</p></section>
+<section class="mode-picker" aria-label="Modo de jogo"><button id="mode-adventure" aria-pressed="true">🗺️ Aventura<small>Explore as onze fases</small></button><button id="mode-race" aria-pressed="false">🏁 Corrida<small>600 m contra três adversários</small></button></section>
+<section id="race-options" class="race-options" hidden><label>Destino <select id="race-destination"><option value="0">Prado</option><option value="1">Cumuruxatiba</option><option value="2">Corumbau</option><option value="3">Caraíva</option><option value="4">Praia do Espelho</option><option value="5">Trancoso</option><option value="6">Ilhéus · Cidade</option><option value="7">Porto Seguro · Cidade</option><option value="8">Itabuna · Cidade</option><option value="9">Caraíva · Barco</option><option value="10">Corumbau · Barco</option></select></label><label><input type="checkbox" id="championship"> Campeonato · onze etapas</label><small>1º: 10 · 2º: 6 · 3º: 4 · 4º: 2 pontos. Sem concluir: 0.</small><p>As faixas verdes no chão dão aceleração. Passe por cima sem pular!</p></section>
 <section id="adventure-map" class="map-section" aria-label="Mapa da aventura"><div class="map-heading"><h2>Sua rota pela Bahia</h2><small id="save-status">Conclua uma fase para liberar a próxima · progresso neste navegador</small></div><div id="phase-map" class="phase-map"></div><p class="map-note">Escolher uma fase reinicia o percurso. Suas medalhas ficam guardadas.</p></section>
 <section class="character-picker" aria-label="Escolha seu personagem"><div><strong>Quem vai nessa aventura?</strong><small id="character-name" aria-live="polite">Homem selecionado</small></div><button id="choose-man" aria-pressed="true"><span>🧑</span> Homem<small>Corredor · camiseta laranja</small></button><button id="choose-woman" aria-pressed="false"><span>👩</span> Mulher<small>Corredora · camiseta turquesa</small></button></section>
 <section class="missions" aria-label="Missões da fase"><span><span id="phase-label">Fase 1 de 6</span> · MISSÕES DA PRAIA</span><b id="mission-shells">0/20 conchas</b><b id="mission-jumps">0/10 obstáculos pulados</b></section>
-<section class="setup-launch"><button id="launch-game">Começar a jogar →</button><p>Deslize: ← → mudar faixa · ↑ pular · ↓ deslizar. Dois toques: turbo. Itens ativam ao coletar.</p><small id="launch-error" role="status"></small></section>
+<section class="setup-launch"><button id="launch-game">Começar a jogar →</button><p>Em terra: ← → desviar · ↑ pular · ↓ deslizar. No barco: ↑ turbo · ↓ frear. Dois toques: turbo.</p><small id="launch-error" role="status"></small></section>
 <div class="mobile-help">📱 Deslize para cima para pular, para baixo para agachar e para os lados para mudar de faixa. Jogue em pé com os controles sobre o cenário. <button id="mobile-play">Jogar com tela dedicada</button></div><button id="mobile-exit" hidden>☰ Voltar ao menu</button>
 <div class="game">
 <div id="countdown" class="countdown" role="status" hidden>3</div>
@@ -83,8 +83,8 @@
 <span>Prado, BA · Edição 14.0</span>
 </div>
 </main>
-<script src="assets/js/game.js?v=22" defer>
+<script src="assets/js/game.js?v=23" defer>
 </script>
-<script src="assets/js/pista.js?v=22" defer></script>
+<script src="assets/js/pista.js?v=23" defer></script>
 </body>
 </html>
