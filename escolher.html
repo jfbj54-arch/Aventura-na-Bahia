@@ -12,7 +12,7 @@
 <link rel="apple-touch-icon" href="assets/img/icon-180.png">
 <link rel="manifest" href="manifest.webmanifest">
 <link rel="icon" type="image/svg+xml" href="assets/img/favicon.svg">
-<link rel="stylesheet" href="assets/css/style.css?v=19">
+<link rel="stylesheet" href="assets/css/style.css?v=20">
 </head>
 <body data-screen="setup">
 <header>
@@ -36,8 +36,8 @@
 <section class="character-picker" aria-label="Escolha seu personagem"><div><strong>Quem vai nessa aventura?</strong><small id="character-name" aria-live="polite">Homem selecionado</small></div><button id="choose-man" aria-pressed="true"><span>🧑</span> Homem<small>Corredor · camiseta laranja</small></button><button id="choose-woman" aria-pressed="false"><span>👩</span> Mulher<small>Corredora · camiseta turquesa</small></button></section>
 <section class="missions" aria-label="Missões da fase"><span><span id="phase-label">Fase 1 de 6</span> · MISSÕES DA PRAIA</span><b id="mission-shells">0/20 conchas</b><b id="mission-jumps">0/10 obstáculos pulados</b></section>
 <section id="wardrobe" class="wardrobe" aria-label="Roupas e recordes"></section>
-<section class="setup-launch"><button id="launch-game">Começar a jogar →</button><p>Três faixas: deslize para os lados para desviar, toque para pular e deslize para baixo para agachar.</p><small id="launch-error" role="status"></small></section>
-<div class="mobile-help">📱 Toque para pular · deslize para os lados para mudar de faixa e para baixo para agachar. Jogue em pé com os controles sobre o cenário. <button id="mobile-play">Jogar com tela dedicada</button></div><button id="mobile-exit" hidden>☰ Voltar ao menu</button>
+<section class="setup-launch"><button id="launch-game">Começar a jogar →</button><p>Deslize: ← → mudar faixa · ↑ pular · ↓ deslizar. Dois toques: turbo. Itens ativam ao coletar.</p><small id="launch-error" role="status"></small></section>
+<div class="mobile-help">📱 Deslize para cima para pular, para baixo para agachar e para os lados para mudar de faixa. Jogue em pé com os controles sobre o cenário. <button id="mobile-play">Jogar com tela dedicada</button></div><button id="mobile-exit" hidden>☰ Voltar ao menu</button>
 <div class="game">
 <div id="countdown" class="countdown" role="status" hidden>3</div>
 <canvas id="game" width="1100" height="490" aria-label="Corrida em três faixas, câmera atrás do personagem">
@@ -60,6 +60,7 @@
 <div id="celebration" class="celebration" hidden></div>
 <div id="podium" class="podium" hidden></div>
 <button class="primary" id="start">Começar a jogar →</button>
+<button id="sound" aria-label="Ligar ou desligar som" aria-pressed="true">Som: ligado</button>
 </div>
 </div>
 </div>
@@ -72,9 +73,9 @@
 <span class="desktop">
 <span class="key">ESPAÇO / ↑</span> <b>Pular</b>
 </span>
-<span>☝ <b>Toque na praia</b> para pular</span>
+<span><b>Deslize para cima</b> para pular</span>
 </div>
-<button id="sound" aria-label="Ligar ou desligar som" aria-pressed="true">Som: ligado</button>
+
 <button id="lane-left" aria-label="Faixa à esquerda">←</button><button id="lane-right" aria-label="Faixa à direita">→</button>
 <button id="jump" aria-label="Pular">Pular ↑</button>
 </div>
@@ -83,8 +84,8 @@
 <span>Prado, BA · Edição 14.0</span>
 </div>
 </main>
-<script src="assets/js/game.js?v=19" defer>
+<script src="assets/js/game.js?v=20" defer>
 </script>
-<script src="assets/js/pista.js?v=19" defer></script>
+<script src="assets/js/pista.js?v=20" defer></script>
 </body>
 </html>
