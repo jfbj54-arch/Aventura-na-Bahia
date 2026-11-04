@@ -40,3 +40,41 @@ function forwardFrame(now){const dt=Math.max(0,Math.min((now-last)/1000,.035));l
 // A partida pode ter sido iniciada pelo script de navegação antes deste arquivo.
 for(let i=0;i<rivals.length;i++){rivals[i].lane=[0,2,0][i];rivals[i].lanePosition=rivals[i].lane}
 objects=[];syncHud();
+
+// Deck texturizado projetado em faixas finas: a madeira acompanha a profundidade.
+const deckWood=new Image();deckWood.src='assets/img/madeira-passarela.png';
+const trackBeforeWood=drawTrack;
+function deckPoint(z){const scale=18/(18+Math.max(-6,z));return {y:trackHeight*.27+trackHeight*.5*scale,s:scale,half:435*scale}}
+function deckRail(side){const H=trackHeight;const near=deckPoint(-5.7),far=deckPoint(175);const edgeNear=500+side*near.half,edgeFar=500+side*far.half;limb([[edgeNear,near.y+12*near.s],[edgeFar,far.y+12*far.s]],'#574335',Math.max(2,15*near.s));for(let world=Math.floor((dist-6)/6)*6;world<dist+175;world+=6){const z=world-dist;if(z<-5.7)continue;if(!['boardwalk','bridge'].includes(surfaceAt(world)))continue;const p=deckPoint(z),a=500+side*(p.half+8*p.s);limb([[a+8*p.s,p.y+2],[a+8*p.s,p.y-110*p.s]],'#46382d55',13*p.s);limb([[a,p.y+4],[a,p.y-112*p.s]],'#8b6c4c',11*p.s);limb([[a-side*2*p.s,p.y-105*p.s],[a-side*2*p.s,p.y-4]],'#cfb38d',3*p.s)}
+// Cada trecho de corrimão acompanha o mesmo piso, sem fechar o caminho.
+for(let z=170;z>-5.7;z-=2){if(!['boardwalk','bridge'].includes(surfaceAt(dist+z)))continue;const a=deckPoint(z),b=deckPoint(Math.max(-5.7,z-2));for(const height of [65,112]){limb([[500+side*(a.half+8*a.s),a.y-height*a.s],[500+side*(b.half+8*b.s),b.y-height*b.s]],height===112?'#c1a17b':'#85684a',Math.max(1,(height===112?10:6)*b.s))}}}
+drawTrack=function(){if(urbanTrack()){trackBeforeWood();return}const H=trackHeight,hy=H*.27,img=landscapes[(gameMode==='race'?raceDestination:phaseIndex)%6];x.fillStyle=gradient(0,H,['#65b8df','#d9e7d5','#d9c196']);x.fillRect(0,0,1000,H);if(img.complete&&img.naturalWidth){const src=coastPixels(img);x.drawImage(src.image,src.sx,src.sy,src.width,src.height,0,0,1000,H*.55)}const blend=x.createLinearGradient(0,H*.49,0,H*.63);blend.addColorStop(0,'#dfcba400');blend.addColorStop(1,'#dfcba4');x.fillStyle=blend;x.fillRect(0,H*.49,1000,H*.51);
+const bottom=deckPoint(-5.7);x.save();path([[500,hy],[500+bottom.half,bottom.y],[500-bottom.half,bottom.y]],'#c9b18a');x.beginPath();x.moveTo(500,hy);x.lineTo(500+bottom.half,bottom.y);x.lineTo(500-bottom.half,bottom.y);x.closePath();x.clip();const band=Math.max(3,H/260);for(let yy=H;yy>hy+H*.042;yy-=band){const ytop=Math.max(hy+H*.042,yy-band),middle=(yy+ytop)/2,z=18*(H*.5)/(middle-hy)-18,p=deckPoint(z),kind=surfaceAt(dist+z),wood=kind==='boardwalk'||kind==='bridge';if(wood&&deckWood.complete&&deckWood.naturalWidth){const textureY=(((dist+z)/7)%1+1)%1*deckWood.naturalHeight,zTop=18*(H*.5)/(ytop-hy)-18,zBottom=18*(H*.5)/(yy-hy)-18;const textureH=Math.max(1,Math.min(deckWood.naturalHeight-textureY,Math.abs(zTop-zBottom)/7*deckWood.naturalHeight));x.drawImage(deckWood,0,textureY,deckWood.naturalWidth,textureH,500-p.half-3,ytop,p.half*2+6,yy-ytop+.8)}else{x.fillStyle=wood?'#ad8e68':kind==='stone'?'#9eaa9d':'#e5d0a6';x.fillRect(500-p.half-3,ytop,p.half*2+6,yy-ytop+1)}}
+// Sombra discreta das vigas laterais, sem escurecer o centro.
+const shade=x.createLinearGradient(0,0,1000,0);shade.addColorStop(0,'#24190f32');shade.addColorStop(.2,'#24190f00');shade.addColorStop(.8,'#24190f00');shade.addColorStop(1,'#24190f38');x.fillStyle=shade;x.fillRect(0,hy,1000,H-hy);x.restore();deckRail(-1);deckRail(1);
+// Grãos dos trechos de areia acompanham o chão.
+for(let i=0;i<190;i++){const z=((i*1.37-dist)%130+130)%130;if(surfaceAt(dist+z)!=='sand')continue;const lane=((i*37)%300)/100-.5,p=project(lane,z);ellipse(p.x,p.y,Math.max(.35,p.s*1.5),Math.max(.25,p.s*.65),'#99795238')}};
+
+// Pequenos movimentos no cenário, sem mover a câmera nem encobrir os obstáculos.
+let livingDust=[],pickupGlows=[],footPhase=-1,wasGrounded=true;
+const startBeforeLife=start;
+start=function(){livingDust=[];pickupGlows=[];footPhase=-1;wasGrounded=true;startBeforeLife()};
+const collisionBeforeLife=forwardCollision;
+forwardCollision=function(o){const before=shells,hadItem=heldItem;collisionBeforeLife(o);if(shells>before||o.kind==='crate'&&o.dead&&!hadItem){for(let i=0;i<6;i++)pickupGlows.push({lane:o.lane,at:o.at,age:0,seed:i*1.047})}};
+const updateBeforeLife=update;
+update=function(dt){const active=state==='playing';updateBeforeLife(dt);if(!active)return;for(const p of livingDust){p.age+=dt;p.at-=dt*1.4}livingDust=livingDust.filter(p=>p.age<.65);for(const p of pickupGlows)p.age+=dt;pickupGlows=pickupGlows.filter(p=>p.age<.55);const onGround=y===0,step=Math.floor(gait*2);if(surfaceAt()==='sand'&&onGround&&(!wasGrounded||step!==footPhase)){for(let i=0;i<(!wasGrounded?7:3);i++)livingDust.push({lane:lanePosition+(Math.random()-.5)*.14,at:dist-.5-Math.random(),age:0,size:4+Math.random()*5})}footPhase=step;wasGrounded=onGround;if(livingDust.length>32)livingDust.splice(0,livingDust.length-32)};
+function coastalLife(){const H=trackHeight;x.save();
+// As aves ficam acima da área onde o jogador precisa reagir.
+for(let i=0;i<5;i++){const a=((i*211+t*(10+i))%1300)-140,b=H*(.12+(i%3)*.024)+Math.sin(t*.5+i)*8,flap=Math.sin(t*4+i)*4;x.globalAlpha=.48;x.strokeStyle='#345a63';x.lineWidth=1.8;x.beginPath();x.moveTo(a-11,b-flap);x.quadraticCurveTo(a-5,b-6,a,b);x.quadraticCurveTo(a+5,b-6,a+11,b-flap);x.stroke()}
+x.globalAlpha=1;if(!urbanTrack()){x.save();x.beginPath();x.rect(0,0,1000,H);const bottom=deckPoint(-5.7);x.moveTo(500,H*.27);x.lineTo(500+bottom.half,bottom.y);x.lineTo(500-bottom.half,bottom.y);x.closePath();x.clip('evenodd');for(let j=0;j<4;j++){x.strokeStyle='#f5fffa';x.globalAlpha=.13+j*.025;x.lineWidth=1.2+j*.8;x.beginPath();for(let a=700;a<=1020;a+=10){const yy=H*(.397+j*.028)+Math.sin(a/60+t*.85+j)*3+Math.sin(t*.5+j)*2;a===700?x.moveTo(a,yy):x.lineTo(a,yy)}x.stroke()}x.restore()}
+x.restore()}
+function groundLife(){for(const p of livingDust){const z=p.at-dist;if(z<-5.7)continue;const a=project(p.lane,z);x.save();x.globalAlpha=(1-p.age/.65)*.22;ellipse(a.x-p.age*13,a.y-p.age*25,(p.size+p.age*13)*a.s,(p.size*.4+p.age*5)*a.s,'#d9c29c');x.restore()}for(const p of pickupGlows){const a=project(p.lane,Math.max(-3,p.at-dist)),spread=12+p.age*75;x.save();x.globalAlpha=1-p.age/.55;const cx=a.x+Math.cos(p.seed)*spread*a.s,cy=a.y-(85+p.age*120)*a.s+Math.sin(p.seed)*spread*a.s;limb([[cx-4*a.s,cy],[cx+4*a.s,cy]],'#fff5b9',2*a.s);limb([[cx,cy-4*a.s],[cx,cy+4*a.s]],'#fff5b9',2*a.s);x.restore()}}
+const objectBeforeLife=drawForwardObject;
+drawForwardObject=function(o){if(o.kind==='shell'&&!o.dead){const p=project(o.lane,o.at-dist);x.save();const lift=Math.sin(t*2.8+o.at*.2)*7*p.s;x.translate(p.x,p.y-65*p.s+lift);x.scale(.8+Math.cos(t*2+o.at*.2)*.2,1);x.translate(-p.x,-p.y+65*p.s);objectBeforeLife(o);x.restore()}else objectBeforeLife(o)};
+const trackBeforeLife=drawTrack;
+drawTrack=function(){trackBeforeLife();coastalLife();groundLife()};
+// Sombras discretas dos postes sobre a madeira.
+const railsBeforeLife=deckRail;
+deckRail=function(side){x.save();for(let world=Math.floor((dist-6)/6)*6;world<dist+90;world+=6){const z=world-dist;if(z<-5.7||!['boardwalk','bridge'].includes(surfaceAt(world)))continue;const p=deckPoint(z),edge=500+side*p.half;path([[edge,p.y],[edge-side*48*p.s,p.y-12*p.s],[edge-side*52*p.s,p.y-8*p.s],[edge-side*7*p.s,p.y+4*p.s]],'#3f302527')}x.restore();railsBeforeLife(side)};
+const cityBeforeLife=drawCityBlock;
+drawCityBlock=function(i){cityBeforeLife(i);x.save();const sway=Math.sin(t*2+i)*5;path([[-55,-90],[55,-90],[64+sway,-64],[-64+sway,-64]],i%2?'#c2694e':'#478d85');for(let a=-40;a<50;a+=20)limb([[a,-87],[a+sway,-67]],'#f5e7c5',7);x.restore()};

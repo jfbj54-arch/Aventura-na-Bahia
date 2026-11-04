@@ -192,3 +192,7 @@ NITIDEZ: fundos refeitos com mais pixels na altura de cada cenário, renderizaç
 CÂMERA POR TRÁS + CIDADES: nove fases, seis praias e três percursos urbanos inspirados em Ilhéus, Porto Seguro e Itabuna. Carros devem ser contornados; cones e barreiras podem ser pulados; pórticos exigem deslizar. Setas laterais ou A/D trocam faixa. Toque ou seta para cima pula; gesto para baixo ou S desliza. Campeonato agora tem nove etapas. Atualize TODOS os arquivos: index.html, escolher.html, jogar.html, manifest.webmanifest e assets (inclui pista.js e corredores-costas.png). Progresso continua salvo neste navegador.
 
 CONTROLES POR GESTOS: deslize para os lados para trocar faixa, para cima para pular, para baixo para deslizar. Dois toques curtos ativam o turbo quando carregado. Itens ativam automaticamente ao coletar. Sensibilidade moderada (22 pixels CSS), um comando por gesto. Som fica no painel de pausa; apenas menu e pausa permanecem durante a partida. Teclado preservado.
+
+PASSARELA: textura fotográfica de madeira envelhecida projetada na profundidade, vigas e corrimãos laterais, sombras e integração da base com a praia. Física, gestos e fases preservados. Atualize os três HTML e a pasta assets completa.
+
+CENÁRIO VIVO: aves ao longe, pequenas ondas nas laterais, poeira dos passos na areia, brilho ao coletar conchas, conchas em movimento, sombras dos postes e toldos ao vento nas cidades. Efeitos visuais não alteram colisões nem gestos.
