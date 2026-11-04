@@ -182,3 +182,5 @@ GitHub: envie index.html, escolher.html, jogar.html, manifest.webmanifest
 e a pasta assets diretamente à raiz, substituindo os arquivos antigos.
 
 VERSÃO 14: controles móveis transparentes. Seta para cima pula, seta para baixo desliza, raio ativa turbo, setas duplas trocam rota. Item aparece como ícone quando coletado.
+
+ATUALIZAÇÃO COMPLETA: roupas desbloqueadas com conchas coletadas (mais 20 por chegada), recordes separados de aventura/corrida por praia, oponentes com turbo e deslize, câmera suave, poeira e trechos de areia, passarela, pedras e ponte. Dados ficam neste navegador. Envie todos os arquivos e assets ao GitHub.
